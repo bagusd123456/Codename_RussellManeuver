@@ -18,9 +18,9 @@ public class SoundManager : MonoBehaviour
     public static Action<float> OnVariableChange;
 
     public AudioClip SFXTestClip;
-    public static float publicSFXVolume = 1.0f;
 
     private float _BGMVolume = 1f;
+    private float _SFXVolume = 1f;
 
     public float BGMVolume{
         get { return _BGMVolume; }
@@ -102,7 +102,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        float volume = publicSFXVolume;
+        float volume = _SFXVolume;
         _sourceSFX.PlayOneShot(clip, volume);
     }
 
@@ -142,7 +142,7 @@ public class SoundManager : MonoBehaviour
     {
         soundData = new SoundData();
         soundData.volume_BGM = BGMVolume;
-        soundData.volume_SFX = publicSFXVolume;
+        soundData.volume_SFX = _SFXVolume;
 
         PlayerPrefs.SetString("SoundData", JsonUtility.ToJson(soundData));
     }
@@ -157,7 +157,7 @@ public class SoundManager : MonoBehaviour
             Debug.Log("Saves Found \n Loading....");
 
             BGMVolume = soundData.volume_BGM;
-            publicSFXVolume = soundData.volume_SFX;
+            _SFXVolume = soundData.volume_SFX;
         }
     }
 }

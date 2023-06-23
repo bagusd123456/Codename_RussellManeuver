@@ -17,6 +17,8 @@ namespace KinematicCharacterController.Examples
         private const string HorizontalInput = "Horizontal";
         private const string VerticalInput = "Vertical";
 
+        Vector3 lookInputVector;
+        public bool enableMouseMove = true;
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -53,15 +55,18 @@ namespace KinematicCharacterController.Examples
 
         private void HandleCameraInput()
         {
-            // Create the look input vector for the camera
-            float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput);
-            float mouseLookAxisRight = Input.GetAxisRaw(MouseXInput);
-            Vector3 lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);
-
-            // Prevent moving the camera while the cursor isn't locked
-            if (Cursor.lockState != CursorLockMode.Locked)
+            if (enableMouseMove)
             {
-                lookInputVector = Vector3.zero;
+                // Create the look input vector for the camera
+                float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput);
+                float mouseLookAxisRight = Input.GetAxisRaw(MouseXInput);
+                lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);
+
+                // Prevent moving the camera while the cursor isn't locked
+                if (Cursor.lockState != CursorLockMode.Locked)
+                {
+                    lookInputVector = Vector3.zero;
+                }
             }
 
             // Input for zooming the camera (disabled in WebGL because it can cause problems)
