@@ -39,6 +39,7 @@ namespace KinematicCharacterController.Examples
             }
 
             HandleCharacterInput();
+            HandleAttackInput();
         }
 
         private void LateUpdate()
@@ -99,6 +100,14 @@ namespace KinematicCharacterController.Examples
 
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);
+        }
+
+        private void HandleAttackInput()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlayerCharacter.OnPlayerAttack?.Invoke();
+            }
         }
     }
 }

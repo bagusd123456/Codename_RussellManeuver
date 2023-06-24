@@ -47,11 +47,11 @@ public class GameManager : MonoBehaviour
 
     public void LoseCondition()
     {
-
+        Debug.Log("Lose");
     }
 
     public void WinCondition()
     {
-
+        Debug.Log("Win");
     }
 }
